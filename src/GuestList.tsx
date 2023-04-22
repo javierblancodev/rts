@@ -1,14 +1,32 @@
-import { useState } from "react"
+import { useState } from 'react';
 
 const GuestList: React.FC = () => {
-  const [name, setName] = useState('')
+  const [name, setName] = useState('');
+  const [guests, setGuests] = useState<string[]>([]);
 
-  return <div>
-    <h3>Guest List</h3>
+  const onClick = () => {
+    setGuests([...guests, name]);
 
-    <input value={name} onChange={(e) => setName(e.target.value)}/>
-    <button>Add Guest</button>
-  </div>
-}
+    setName('');
+    console.log(name);
+  };
 
-export default GuestList 
+  console.log('second', name);
+
+  return (
+    <div>
+      <h3>Guest List</h3>
+
+      <ul>
+        {guests.map((guest) => (
+          <li key={guest}>{guest}</li>
+        ))}
+      </ul>
+
+      <input value={name} onChange={(e) => setName(e.target.value)} />
+      <button onClick={onClick}>Add Guest</button>
+    </div>
+  );
+};
+
+export default GuestList;
